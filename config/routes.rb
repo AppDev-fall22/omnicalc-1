@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get("/square/results", {:controller => "application", :action => "calculate_square"})
 
-  get("/random/results", {:controller => "applicatin", :action => "calculate_random"})
+  get("/random/results", {:controller => "application", :action => "calculate_random"})
 
   get("/square_root/new", {:controller => "application", :action => "blank_sqrt_form"})
 
@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   get("/payment/new", {:controller => "application", :action => "blank_payment_form"})
 
   get("/payment/results", {:controller => "application", :action => "calculate_payment"})
+
+  get("/random/new", {:controller => "application", :action => "blank_random_form"})
 
 end

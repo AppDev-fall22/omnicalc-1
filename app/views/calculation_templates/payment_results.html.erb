@@ -2,14 +2,16 @@
 
 <dl>
   <dt>APR</dt>
-  <dd><%=@user_apr%></dd>
+  <dd><%=@formatted_apr%></dd>
 
   <dt>Number of years</dt>
   <dd><%=@user_years.to_i%></dd>
 
   <dt>Principal</dt>
-  <dd>$<%=@user_principal.round(2)%></dd>
+  <dd><%=number_to_currency(@user_principal)%></dd>
 
   <dt>Payment</dt>
-  <dd>$<%=@monthly_pay.round(2)%></dd>
+  <dd><%=number_to_currency(@monthly_pay)%></dd>
 </dl>
+
+<a href="/payment/new">Calculate another payment</a>

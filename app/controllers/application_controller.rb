@@ -15,34 +15,41 @@ class ApplicationController < ActionController::Base
     @upper = params.fetch("user_max").to_f
     @result = rand(@lower..@upper)
 
-    render({ :template => "calculation_templates/rand_results.html.erb"})
+    render({ :template => "calculation_templates/rand_results.html.erb" })
   end
 
   def blank_sqrt_form
-    render({:template => "calculation_templates/sqrt_form.html.erb"})
+    render({ :template => "calculation_templates/sqrt_form.html.erb" })
   end
 
   def calculate_sqrt
     @user_num = params.fetch("user_sqrt_num").to_f
     @root = Math.sqrt(@user_num)
 
-    render({:template => "calculation_templates/sqrt_results.html.erb"})
+    render({ :template => "calculation_templates/sqrt_results.html.erb" })
   end
 
   def blank_payment_form
-    render({:template => "calculation_templates/payment_form.html.erb"})
+    render({ :template => "calculation_templates/payment_form.html.erb" })
   end
 
   def calculate_payment
-    @user_apr = params.fetch("user_apr").to_f
+    @user_apr = params.fetch("user_apr").to_f / 100
     @user_years = params.fetch("user_years").to_f
     @user_principal = params.fetch("user_principal").to_f
 
-    num_months = @user_years * 12
-    total_owed = @user_principal * ((1 + @user_apr/100) ** @user_years)
+    months = @user_years * 12
+    r = @user_apr / 12.to_f
 
-    @monthly_pay = total_owed/num_months
-    render({:template => "calculation_templates/payment_results.html.erb"})
+    numerator = r * @user_principal
+    denominator = 1 - ((1 + r) ** (-months))
+
+    @monthly_pay = numerator / denominator
+    @formatted_apr = (@user_apr * 100).to_s( :percentage, { :precision => 4 } )
+    render({ :template => "calculation_templates/payment_results.html.erb" })
   end
 
+  def blank_random_form
+    render({ :template => "calculation_templates/random_form.html.erb" })
+  end
 end
