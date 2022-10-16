@@ -10,4 +10,8 @@ Rails.application.routes.draw do
 
   get("/square_root/results", {:controller => "application", :action => "calculate_sqrt"})
 
+  get("/payment/new", {:controller => "application", :action => "blank_payment_form"})
+
+  get("/payment/results", {:controller => "application", :action => "calculate_payment"})
+
 end
